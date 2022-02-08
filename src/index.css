@@ -1,13 +1,56 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(63, 61, 65);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 25% 25px 25%;
+  border-radius: 5px;
+}
+
+.inProgress:hover,
+.done:hover {
+  cursor: pointer;
+  user-select: none;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.btn-group {
+  background: white;
+  border-radius: 5px;
+}
+.btn-danger {
+  border-radius: 0 5px 5px 0;
+}
+.btn-success {
+  border-radius: 5px 0 0 5px;
+}
+.emptyToDo {
+  border-radius: 5px;
+}
+.btnSubmit {
+  border-radius: 0;
+}
+.inputText {
+  border-radius: 2px 0 0 2px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+.timeStamp {
+  font-size: xx-small;
+  color: rgb(125, 123, 128);
 }
