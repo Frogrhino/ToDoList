@@ -6,14 +6,16 @@ class FileUploader extends Component {
   render() {
     return (
       <div className="d-flex flex-column">
-        <button
-          onClick={this.props.changeModal}
-          type="button"
-          className="btn-close m-2"
-          aria-label="Close"
-        />
-        <div className="modal-content p-2 d-flex justify-content-center">
-          <h5 className="modal-header">Input your CSV or JSON file</h5>
+        <div className="modal-content d-flex modalContent">
+          <h5 className="modal-header">
+            Input your CSV or JSON file{" "}
+            <button
+              onClick={this.props.changeModal}
+              type="button"
+              className="btn-close m-2"
+              aria-label="Close"
+            />
+          </h5>
           <input
             type="file"
             name="file"
@@ -21,7 +23,7 @@ class FileUploader extends Component {
             className="modal-body"
           />
           <button
-            className="btn-primary btnRadius"
+            className="btn-primary btnRadius p-2 mt-4"
             onClick={this.props.confirmUpload}
           >
             Upload

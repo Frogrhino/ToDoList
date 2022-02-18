@@ -9,31 +9,16 @@ class ToDo extends Component {
     } = this.props;
 
     return (
-      <div className="d-flex p-2">
+      <div className="d-flex p-2 align-items-stretch">
         {/* Checkbox Done button */}
         <div
-          className="btn-group"
-          role="group"
-          aria-label="Basic checkbox toggle button group"
-          hidden={uploadBool}
+          id={"btncheck-" + id}
+          className="btn btn-success d-flex align-items-center "
+          onClick={() =>
+            this.props.changeState(timeStampDone ? false : true, id)
+          }
         >
-          <input
-            type="checkbox"
-            className="btn-check"
-            id={"btncheck-" + id}
-            autoComplete="off"
-            onClick={() =>
-              this.props.changeState(timeStampDone ? false : true, id)
-            }
-            checked={!timeStampDone ? false : true}
-            readOnly
-          />
-          <label
-            className="btn btn-success d-flex align-items-center"
-            htmlFor={"btncheck-" + id}
-          >
-            {this.renderLabelImage()}
-          </label>
+          {this.renderLabelImage()}
         </div>
 
         {/* Middle part: To-Dos and Timestamps*/}

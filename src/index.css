@@ -40,9 +40,6 @@ code {
 .btnSubmit {
   border-radius: 0 2.5px 2.5px 0;
 }
-.btn-success {
-  border-radius: 5px 0 0 5px;
-}
 .emptyToDo,
 .btnRadius {
   border-radius: 5px;
@@ -54,6 +51,9 @@ code {
 .timeStamp {
   font-size: xx-small;
   color: rgb(125, 123, 128);
+}
+.modalContent {
+  border: 0;
 }
 .hidden {
   display: none;

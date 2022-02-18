@@ -19,12 +19,17 @@ class ToDoList extends Component {
   render() {
     return (
       <div className="top bg-light">
-        <ReactModal isOpen={this.state.uploadBool}>
+        <ReactModal
+          isOpen={this.state.uploadBool}
+          shouldCloseOnOverlayClick={true}
+          style={{
+            content: { top: "35%", left: "35%", right: "35%", bottom: "35%" },
+          }}
+        >
           <FileUploader
             onChangeHandler={this.onChangeHandler}
             changeModal={this.changeModal}
             confirmUpload={this.confirmUpload}
-            shouldCloseOnOverlayClick={true}
           />
         </ReactModal>
         <div>
