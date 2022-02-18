@@ -1,42 +1,31 @@
 import React, { Component } from "react";
 
 class ToDo extends Component {
-  state = {
-    timeStampCreated: new Intl.DateTimeFormat("en-DE", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    }).format(Date.now()),
-    timeStampDone: "",
-    class: "list-group-item d-flex flex-fill inProgress",
-    selected: true,
-  };
+  state = {};
 
   render() {
-    const { selected, timeStampCreated, timeStampDone } = this.state;
     const {
-      toDo: { value, id },
+      toDo: { value, id, timeStampCreated, timeStampDone, uploadBool },
     } = this.props;
 
     return (
       <div className="d-flex p-2">
-        {/* Done button */}
+        {/* Checkbox Done button */}
         <div
           className="btn-group"
           role="group"
           aria-label="Basic checkbox toggle button group"
+          hidden={uploadBool}
         >
           <input
             type="checkbox"
             className="btn-check"
             id={"btncheck-" + id}
             autoComplete="off"
-            onClick={() => this.changeState(selected)}
-            checked={!selected}
+            onClick={() =>
+              this.props.changeState(timeStampDone ? false : true, id)
+            }
+            checked={!timeStampDone ? false : true}
             readOnly
           />
           <label
@@ -50,14 +39,44 @@ class ToDo extends Component {
         {/* Middle part: To-Dos and Timestamps*/}
         <div className="d-flex flex-fill flex-column">
           <div className="list-group-item d-flex justify-content-between timeStamp">
-            <div className="timeStampStart">Created: {timeStampCreated}</div>
-            <div className="timeStampDone">{timeStampDone}</div>
+            <div className="timeStampStart">
+              Created:{" "}
+              {new Intl.DateTimeFormat("en-DE", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+              }).format(timeStampCreated)}
+            </div>
+            <div className="timeStampDone">
+              {timeStampDone
+                ? "Done: " +
+                  new Intl.DateTimeFormat("en-DE", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                    second: "numeric",
+                  }).format(timeStampDone)
+                : ""}
+            </div>
           </div>
           <li
             key={id}
             id={id}
-            onClick={() => this.changeState(selected)}
-            className={this.state.class}
+            onClick={() =>
+              this.props.changeState(timeStampDone ? false : true, id)
+            }
+            className={
+              timeStampDone
+                ? "list-group-item d-flex flex-fill done"
+                : "list-group-item d-flex flex-fill inProgress"
+            }
           >
             {value}
           </li>
@@ -84,7 +103,7 @@ class ToDo extends Component {
   }
 
   renderLabelImage = () => {
-    if (this.state.selected)
+    if (this.props.toDo.timeStampDone ? false : true)
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -116,33 +135,6 @@ class ToDo extends Component {
           <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
         </svg>
       );
-  };
-
-  changeState = (selected) => {
-    let str = this.state.class.substr(0, 33);
-    if (selected) {
-      this.setState({
-        class: str + "done",
-        timeStampDone:
-          "Done: " +
-          new Intl.DateTimeFormat("en-DE", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-          }).format(Date.now()),
-        selected: false,
-      });
-    } else {
-      this.setState({
-        class: str + "inProgress",
-        timeStampDone: "",
-        selected: true,
-      });
-    }
   };
 }
 
