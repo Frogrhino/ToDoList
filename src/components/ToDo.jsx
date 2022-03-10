@@ -5,15 +5,24 @@ class ToDo extends Component {
 
   render() {
     const {
-      toDo: { value, id, timeStampCreated, timeStampDone, uploadBool },
+      toDo: { value, id, timeStampCreated, timeStampDone, checked },
     } = this.props;
 
     return (
       <div className="d-flex p-2 align-items-stretch">
+        <input
+          type="checkbox"
+          id={id}
+          className="m-2"
+          onChange={this.toggleCheckbox}
+          checked={checked}
+          hidden={this.props.selection}
+        ></input>
+
         {/* Checkbox Done button */}
         <div
           id={"btncheck-" + id}
-          className="btn btn-success d-flex align-items-center "
+          className="btn btn-success d-flex align-items-center btnDone"
           onClick={() =>
             this.props.changeState(timeStampDone ? false : true, id)
           }
@@ -86,6 +95,11 @@ class ToDo extends Component {
       </div>
     );
   }
+
+  toggleCheckbox = () => {
+    this.setState({ checked: !this.state.checked });
+    this.props.getSelected(this.props.toDo.id);
+  };
 
   renderLabelImage = () => {
     if (this.props.toDo.timeStampDone ? false : true)
