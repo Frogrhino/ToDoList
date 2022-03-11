@@ -4,6 +4,8 @@ import uniqid from "uniqid";
 import FileUploader from "./FileUploader";
 import { usePapaParse } from "react-papaparse";
 import ReactModal from "react-modal";
+import DeleteConfirmModal from "./DeleteConfirmModal";
+import FunctionButtons from "./FunctionButtons";
 
 class ToDoList extends Component {
   state = {
@@ -57,31 +59,7 @@ class ToDoList extends Component {
             },
           }}
         >
-          <div className="d-flex flex-column align-items-stretch">
-            <div className="mb-auto">
-              <h3>Do you really want to delete this?</h3>
-            </div>
-            <div
-              className="btn-group justify-content-center"
-              role="group"
-              aria-label="Basic example"
-            >
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => this.removeToDo(true)}
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => this.removeToDo(false)}
-              >
-                No
-              </button>
-            </div>
-          </div>
+          <DeleteConfirmModal removeToDo={this.removeToDo} />
         </ReactModal>
 
         <div>
@@ -116,57 +94,16 @@ class ToDoList extends Component {
           ) : null}
 
           {/* Buttons */}
-          <div className="d-flex flex-row">
-            <input
-              type="checkbox"
-              className="m-2 bg-secondary"
-              hidden={this.state.selection}
-              onChange={this.toggleAllCheckbox}
-              checked={this.state.checkedAll}
-            ></input>
-            <div
-              className="btn-group d-flex justify-content-center m-2 flex-fill"
-              role="group"
-              aria-label="Basic example"
-            >
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={this.changeStateSelect}
-              >
-                {this.state.selection ? "Show Select" : "Hide Select"}
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => this.removeAlert(null)}
-                hidden={this.state.selection}
-              >
-                Delete Selected
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={this.downloadJSON}
-              >
-                Export JSON
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={this.downloadCSV}
-              >
-                Export CSV
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={this.changeModal}
-              >
-                Import
-              </button>
-            </div>
-          </div>
+          <FunctionButtons
+            selection={this.state.selection}
+            checkedAll={this.state.checkedAll}
+            toggleAllCheckbox={this.toggleAllCheckbox}
+            changeStateSelect={this.changeStateSelect}
+            removeAlert={this.removeAlert}
+            downloadJSON={this.downloadJSON}
+            downloadCSV={this.downloadCSV}
+            changeModal={this.changeModal}
+          />
 
           {/* List of all the To Dos  */}
           <ul className="list-group list-group-flush">{this.renderList()}</ul>
