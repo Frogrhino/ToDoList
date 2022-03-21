@@ -107,14 +107,6 @@ class ToDoList extends Component {
 
           {/* List of all the To Dos  */}
           <ul className="list-group list-group-flush">{this.renderList()}</ul>
-
-          {/* Download link for export data  */}
-          <a
-            style={{ display: "none" }}
-            download={this.state.fileType}
-            href={this.state.fileDownloadUrl}
-            ref={(e) => (this.dofileDownload = e)}
-          ></a>
         </div>
       </div>
     );

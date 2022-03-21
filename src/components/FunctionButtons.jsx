@@ -54,6 +54,14 @@ class FunctionButtons extends Component {
             Import
           </button>
         </div>
+
+        {/* Download link for export data  */}
+        <a
+          style={{ display: "none" }}
+          download={this.state.fileType}
+          href={this.state.fileDownloadUrl}
+          ref={(e) => (this.dofileDownload = e)}
+        ></a>
       </div>
     );
   }
