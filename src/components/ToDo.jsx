@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import * as React from "react";
 
-class ToDo extends Component {
+export default class ToDo extends React.Component {
   state = {};
 
   render() {
@@ -136,5 +136,3 @@ class ToDo extends Component {
       );
   };
 }
-
-export default ToDo;
